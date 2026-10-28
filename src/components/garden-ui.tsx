@@ -6,7 +6,7 @@ import { MONTHS, nextStage, updatePlant, type Category, type Plant, type Stage }
 
 export function Shell({ children, back }: { children: ReactNode; back?: boolean }) {
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <div className="relative min-h-dvh overflow-x-hidden">
       <img src={leaves} alt="" width={864} height={1536} className="fixed inset-0 -z-10 h-full w-full object-cover brightness-75" />
       <div className="mx-auto max-w-md px-6 pb-32 pt-[max(1rem,env(safe-area-inset-top))]">
         <header className="flex items-center justify-between text-cream">
@@ -38,7 +38,7 @@ function StageDot({ stage, onClick, label }: { stage: Stage; onClick: () => void
     <button
       onClick={onClick}
       aria-label={label}
-      className={`relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${I ? "bg-sprout text-paper-foreground" : "h-5 w-5 border-2 border-cream bg-transparent"}`}
+      className={`relative z-10 flex h-7 w-7 shrink-0 outline-none after:absolute after:-inset-3 after:content-[""] active:scale-90 transition items-center justify-center rounded-full ${I ? "bg-sprout text-paper-foreground" : "h-5 w-5 border-2 border-cream bg-transparent"}`}
     >
       {I && <I className="h-4 w-4" />}
     </button>
@@ -47,7 +47,7 @@ function StageDot({ stage, onClick, label }: { stage: Stage; onClick: () => void
 
 export function Timeline({ plants }: { plants: Plant[] }) {
   return (
-    <div className="-mx-6 overflow-x-auto px-6">
+    <div className="no-scrollbar -mx-6 snap-x overflow-x-auto overscroll-x-contain px-6">
       <div className="w-[640px] font-hand text-cream">
         {plants.map((p) => (
           <div key={p.id} className="mb-2">

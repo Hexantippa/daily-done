@@ -20,7 +20,7 @@ function Section({ icon, title, children }: { icon: ReactNode; title: string; ch
   const [open, setOpen] = useState(true);
   return (
     <section>
-      <button className="bark-bar" onClick={() => setOpen(!open)}>{icon}<span className="flex-1 truncate text-left">{title}</span>{open ? <ChevronUp /> : <ChevronDown />}</button>
+      <button className="bark-bar min-h-12 active:brightness-90" onClick={() => setOpen(!open)}>{icon}<span className="flex-1 truncate text-left">{title}</span>{open ? <ChevronUp /> : <ChevronDown />}</button>
       {open && <div className="paper mt-0.5">{children}</div>}
     </section>
   );

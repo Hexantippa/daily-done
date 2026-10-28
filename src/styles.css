@@ -163,3 +163,11 @@
   .bark-bar { @apply flex w-full items-center gap-3 rounded-sm border border-bark-border bg-bark/90 px-3 py-1.5 font-hand text-2xl text-cream shadow-md transition hover:brightness-110; }
   .paper { @apply rounded-sm border border-bark-border bg-paper/95 px-3 py-2 font-hand text-2xl text-paper-foreground shadow-md; }
 }
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; overscroll-behavior-y: none; }
+  body { -webkit-tap-highlight-color: transparent; min-height: 100dvh; touch-action: manipulation; }
+  button, a { -webkit-user-select: none; user-select: none; }
+  input, textarea { font-size: max(16px, 1em); }
+}
+@utility no-scrollbar { scrollbar-width: none; &::-webkit-scrollbar { display: none; } }

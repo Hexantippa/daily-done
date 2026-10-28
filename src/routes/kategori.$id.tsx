@@ -35,7 +35,7 @@ function CategoryPage() {
       <h1 className="sr-only">{cat.name}</h1>
       <div className="mt-6 space-y-5 px-5">
         {plants.map((p) => (
-          <Link key={p.id} to="/vaxt/$id" params={{ id: p.id }} className="bark-bar"><span className="flex-1">{p.name}</span><ChevronRight /></Link>
+          <Link key={p.id} to="/vaxt/$id" params={{ id: p.id }} className="bark-bar min-h-12 active:brightness-90"><span className="flex-1">{p.name}</span><ChevronRight /></Link>
         ))}
         {adding ? (
           <form className="paper flex gap-2" onSubmit={(e) => { e.preventDefault(); add(); }}>

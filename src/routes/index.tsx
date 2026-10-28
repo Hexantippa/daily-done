@@ -29,7 +29,7 @@ function Index() {
     <Shell>
       <Timeline plants={g.plants.filter((p) => p.onTimeline)} />
       <section className="mt-8">
-        <button className="bark-bar" onClick={() => setOpen(!open)}>
+        <button className="bark-bar min-h-12 active:brightness-90" onClick={() => setOpen(!open)}>
           <ShoppingCart className="h-5 w-5" /> <span className="flex-1 text-left">Inköp</span>
           {open ? <ChevronUp /> : <ChevronDown />}
         </button>
@@ -53,7 +53,7 @@ function Index() {
       </section>
       <nav className="mt-10 space-y-4 px-5">
         {g.categories.map((c) => (
-          <Link key={c.id} to="/kategori/$id" params={{ id: c.id }} className="bark-bar">
+          <Link key={c.id} to="/kategori/$id" params={{ id: c.id }} className="bark-bar min-h-12 active:brightness-90">
             <CategoryIcon icon={c.icon} className="h-5 w-5" /><span className="flex-1">{c.name}</span><ChevronRight />
           </Link>
         ))}
