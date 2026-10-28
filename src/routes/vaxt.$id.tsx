@@ -58,7 +58,7 @@ function PlantPage() {
       <Timeline plants={[plant]} />
       <div className="mt-8 space-y-3 px-5">
         {plant.notes.map((n, i) => (
-          <Section key={n.id} icon={<Pencil className="h-5 w-5" />} title={i === 0 ? "Kom ihåg" : n.text.split(".")[0]}>
+          <Section key={n.id} icon={<Pencil className="h-5 w-5" />} title={i === 0 ? "Kom ihåg" : (n.text.split(".")[0] ?? "")}>
             <p className="leading-tight">{n.text}</p>
             <button aria-label="Ta bort anteckning" className="mt-1 rounded-full bg-bark/80 p-1 text-paper-foreground" onClick={() => updatePlant(id, (p) => ({ ...p, notes: p.notes.filter((x) => x.id !== n.id) }))}><Trash2 className="h-4 w-4" /></button>
           </Section>

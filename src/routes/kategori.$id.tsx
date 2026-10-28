@@ -31,7 +31,7 @@ function CategoryPage() {
   };
   return (
     <Shell back>
-      <div className="flex justify-center text-cream"><CategoryIcon icon={cat.icon} className="h-20 w-20 -rotate-12" strokeWidth={1.2} /></div>
+      <div className="flex justify-center text-cream"><CategoryIcon icon={cat.icon} className="h-20 w-20 -rotate-12" /></div>
       <h1 className="sr-only">{cat.name}</h1>
       <div className="mt-6 space-y-5 px-5">
         {plants.map((p) => (
