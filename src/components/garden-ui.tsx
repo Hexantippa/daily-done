@@ -8,7 +8,7 @@ export function Shell({ children, back }: { children: ReactNode; back?: boolean 
   return (
     <div className="relative min-h-screen overflow-x-hidden">
       <img src={leaves} alt="" width={864} height={1536} className="fixed inset-0 -z-10 h-full w-full object-cover brightness-75" />
-      <div className="mx-auto max-w-md px-6 pb-32 pt-4">
+      <div className="mx-auto max-w-md px-6 pb-32 pt-[max(1rem,env(safe-area-inset-top))]">
         <header className="flex items-center justify-between text-cream">
           {back ? (
             <button onClick={() => history.back()} aria-label="Tillbaka"><ArrowLeft className="h-8 w-8" /></button>
@@ -20,7 +20,7 @@ export function Shell({ children, back }: { children: ReactNode; back?: boolean 
         </Link>
         <div className="mt-8">{children}</div>
       </div>
-      <div className="fixed inset-x-0 bottom-4 flex justify-center">
+      <div className="fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] flex justify-center">
         <span className="flex h-16 w-28 items-center justify-center rounded-full bg-moss/90 text-cream shadow-lg"><Camera className="h-7 w-7" /></span>
       </div>
     </div>
