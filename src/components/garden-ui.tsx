@@ -13,7 +13,7 @@ export function Shell({ children, back }: { children: ReactNode; back?: boolean 
           {back ? (
             <button onClick={() => history.back()} aria-label="Tillbaka"><ArrowLeft className="h-8 w-8" /></button>
           ) : <span />}
-          <div className="flex gap-5"><CircleUser className="h-6 w-6" /><BellDot className="h-6 w-6" /></div>
+          <div className="flex gap-5"><Link to="/auth" aria-label="Konto"><CircleUser className="h-6 w-6" /></Link><BellDot className="h-6 w-6" /></div>
         </header>
         <Link to="/" className="mt-8 block rounded-full bg-moss/90 py-4 text-center font-display text-5xl text-cream shadow-lg">
           Min trädgård
