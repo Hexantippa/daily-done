@@ -60,7 +60,7 @@ function PlantPage() {
         {plant.notes.map((n, i) => (
           <Section key={n.id} icon={<Pencil className="h-5 w-5" />} title={i === 0 ? "Kom ihåg" : (n.text.split(".")[0] ?? "")}>
             <p className="leading-tight">{n.text}</p>
-            <button aria-label="Ta bort anteckning" className="mt-1 rounded-full bg-bark/80 p-1 text-paper-foreground" onClick={() => updatePlant(id, (p) => ({ ...p, notes: p.notes.filter((x) => x.id !== n.id) }))}><Trash2 className="h-4 w-4" /></button>
+            <button aria-label="Ta bort anteckning" className="mt-1 rounded-full bg-bark/80 p-2 text-paper-foreground" onClick={() => updatePlant(id, (p) => ({ ...p, notes: p.notes.filter((x) => x.id !== n.id) }))}><Trash2 className="h-4 w-4" /></button>
           </Section>
         ))}
         {draft !== null ? (
@@ -79,7 +79,7 @@ function PlantPage() {
                 {plant.photos.map((ph) => (
                   <div key={ph.id} className="relative">
                     <img src={ph.src} alt={plant.name} className="aspect-[4/3] w-full rounded-sm object-cover" />
-                    <button aria-label="Ta bort bild" className="absolute bottom-1 left-1 rounded-full bg-bark/90 p-1 text-paper-foreground" onClick={() => updatePlant(id, (p) => ({ ...p, photos: p.photos.filter((x) => x.id !== ph.id) }))}><Trash2 className="h-4 w-4" /></button>
+                    <button aria-label="Ta bort bild" className="absolute bottom-1 left-1 rounded-full bg-bark/90 p-2 text-paper-foreground" onClick={() => updatePlant(id, (p) => ({ ...p, photos: p.photos.filter((x) => x.id !== ph.id) }))}><Trash2 className="h-4 w-4" /></button>
                   </div>
                 ))}
               </div>
