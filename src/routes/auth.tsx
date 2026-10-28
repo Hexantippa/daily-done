@@ -16,7 +16,7 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
-type User = { email?: string; name: string };
+type User = { email: string | undefined; name: string };
 
 function AuthPage() {
   const navigate = useNavigate();
