@@ -29,7 +29,7 @@ function Index() {
     <Shell>
       <Timeline plants={g.plants.filter((p) => p.onTimeline)} />
       <section className="mt-8">
-        <button className="bark-bar" onClick={() => setOpen(!open)}>
+        <button className="bark-bar min-h-12 active:brightness-90" onClick={() => setOpen(!open)}>
           <ShoppingCart className="h-5 w-5" /> <span className="flex-1 text-left">Inköp</span>
           {open ? <ChevronUp /> : <ChevronDown />}
         </button>
@@ -38,14 +38,14 @@ function Index() {
             {g.tasks.map((t) => (
               <div key={t.id} className="group flex items-center">
                 <button
-                  className={`flex-1 text-left ${t.done ? "line-through opacity-70" : ""}`}
+                  className={`flex-1 py-1 text-left ${t.done ? "line-through opacity-70" : ""}`}
                   onClick={() => update((x) => ({ ...x, tasks: x.tasks.map((y) => (y.id === t.id ? { ...y, done: !y.done } : y)) }))}
                 >{t.text}</button>
-                <button aria-label="Ta bort" className="opacity-40 hover:opacity-100" onClick={() => update((x) => ({ ...x, tasks: x.tasks.filter((y) => y.id !== t.id) }))}><X className="h-4 w-4" /></button>
+                <button aria-label="Ta bort" className="-mr-2 p-3 opacity-50 active:opacity-100" onClick={() => update((x) => ({ ...x, tasks: x.tasks.filter((y) => y.id !== t.id) }))}><X className="h-4 w-4" /></button>
               </div>
             ))}
             <form className="flex items-center gap-2" onSubmit={(e) => { e.preventDefault(); add(); }}>
-              <button type="submit" aria-label="Lägg till"><Plus /></button>
+              <button type="submit" aria-label="Lägg till" className="py-2"><Plus /></button>
               <input value={text} onChange={(e) => setText(e.target.value)} placeholder="Lägg till" className="flex-1 bg-transparent outline-none placeholder:text-paper-foreground/70" />
             </form>
           </div>
@@ -53,7 +53,7 @@ function Index() {
       </section>
       <nav className="mt-10 space-y-4 px-5">
         {g.categories.map((c) => (
-          <Link key={c.id} to="/kategori/$id" params={{ id: c.id }} className="bark-bar">
+          <Link key={c.id} to="/kategori/$id" params={{ id: c.id }} className="bark-bar min-h-12 active:brightness-90">
             <CategoryIcon icon={c.icon} className="h-5 w-5" /><span className="flex-1">{c.name}</span><ChevronRight />
           </Link>
         ))}
