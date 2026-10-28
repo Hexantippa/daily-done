@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KategoriIdRouteImport } from './routes/kategori.$id'
+import { Route as VaxtIdRouteImport } from './routes/vaxt.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KategoriIdRoute = KategoriIdRouteImport.update({
+  id: '/kategori/$id',
+  path: '/kategori/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VaxtIdRoute = VaxtIdRouteImport.update({
+  id: '/vaxt/$id',
+  path: '/vaxt/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/kategori/$id': typeof KategoriIdRoute
+  '/vaxt/$id': typeof VaxtIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/kategori/$id': typeof KategoriIdRoute
+  '/vaxt/$id': typeof VaxtIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/kategori/$id': typeof KategoriIdRoute
+  '/vaxt/$id': typeof VaxtIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/kategori/$id' | '/vaxt/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/kategori/$id' | '/vaxt/$id'
+  id: '__root__' | '/' | '/kategori/$id' | '/vaxt/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  KategoriIdRoute: typeof KategoriIdRoute
+  VaxtIdRoute: typeof VaxtIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kategori/$id': {
+      id: '/kategori/$id'
+      path: '/kategori/$id'
+      fullPath: '/kategori/$id'
+      preLoaderRoute: typeof KategoriIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vaxt/$id': {
+      id: '/vaxt/$id'
+      path: '/vaxt/$id'
+      fullPath: '/vaxt/$id'
+      preLoaderRoute: typeof VaxtIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  KategoriIdRoute: KategoriIdRoute,
+  VaxtIdRoute: VaxtIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
