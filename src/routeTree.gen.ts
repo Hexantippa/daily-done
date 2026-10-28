@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as KategoriIdRouteImport } from './routes/kategori.$id'
 import { Route as VaxtIdRouteImport } from './routes/vaxt.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KategoriIdRoute = KategoriIdRouteImport.update({
@@ -31,30 +37,34 @@ const VaxtIdRoute = VaxtIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/kategori/$id': typeof KategoriIdRoute
   '/vaxt/$id': typeof VaxtIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/kategori/$id': typeof KategoriIdRoute
   '/vaxt/$id': typeof VaxtIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/kategori/$id': typeof KategoriIdRoute
   '/vaxt/$id': typeof VaxtIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kategori/$id' | '/vaxt/$id'
+  fullPaths: '/' | '/auth' | '/kategori/$id' | '/vaxt/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kategori/$id' | '/vaxt/$id'
-  id: '__root__' | '/' | '/kategori/$id' | '/vaxt/$id'
+  to: '/' | '/auth' | '/kategori/$id' | '/vaxt/$id'
+  id: '__root__' | '/' | '/auth' | '/kategori/$id' | '/vaxt/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   KategoriIdRoute: typeof KategoriIdRoute
   VaxtIdRoute: typeof VaxtIdRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kategori/$id': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   KategoriIdRoute: KategoriIdRoute,
   VaxtIdRoute: VaxtIdRoute,
 }
