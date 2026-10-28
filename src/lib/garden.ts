@@ -42,7 +42,30 @@ const seed: Garden = {
 const KEY = "min-tradgard-v1";
 let state: Garden = seed;
 let loaded = false;
+let userId: string | null = null;
+let saveTimer: ReturnType<typeof setTimeout> | undefined;
 const subs = new Set<() => void>();
+const emit = () => subs.forEach((s) => s());
+
+async function connectAccount() {
+  const { supabase } = await import("@/integrations/supabase/client");
+  const sync = async (id: string | null) => {
+    if (id === userId) return;
+    userId = id;
+    if (!id) return;
+    const { data } = await supabase.from("gardens").select("data").eq("user_id", id).maybeSingle();
+    if (data?.data) {
+      state = data.data as unknown as Garden;
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {}
+      emit();
+    } else {
+      await supabase.from("gardens").upsert({ user_id: id, data: state as never });
+    }
+  };
+  const { data } = await supabase.auth.getSession();
+  await sync(data.session?.user.id ?? null);
+  supabase.auth.onAuthStateChange((_e, session) => { void sync(session?.user.id ?? null); });
+}
 
 function load() {
   if (loaded || typeof window === "undefined") return;
@@ -51,6 +74,17 @@ function load() {
     const raw = localStorage.getItem(KEY);
     if (raw) state = JSON.parse(raw);
   } catch {}
+  void connectAccount();
+}
+
+function saveToAccount() {
+  if (!userId) return;
+  const id = userId;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async () => {
+    const { supabase } = await import("@/integrations/supabase/client");
+    await supabase.from("gardens").upsert({ user_id: id, data: state as never, updated_at: new Date().toISOString() });
+  }, 600);
 }
 
 export function update(fn: (g: Garden) => Garden) {
@@ -61,7 +95,8 @@ export function update(fn: (g: Garden) => Garden) {
   } catch {
     alert("Lagringen är full – ta bort några bilder.");
   }
-  subs.forEach((s) => s());
+  saveToAccount();
+  emit();
 }
 
 export function useGarden(): Garden {
